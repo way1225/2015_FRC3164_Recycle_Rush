@@ -4,7 +4,9 @@
 //A few modifications have been made by Brendan Gregos for FRC Team 3164, Stealth Tigers
 #include <i2cmaster.h>
 
-byte clockPin = 3;
+byte clockPin = 3; //Digital pin on Arduino, connected to the clock line (SCL)
+//Reading something that says Pin 5 (SCL clock line) and 6 (SDA data line) from sensor from the schematis
+//And it also says Pin 5 goes into the Arduino Analog 4, and 6 to Analog 5
 byte buf[9];//Buffer to store the received valeus
 byte addr = 0x02;//address 0x02 in a 8-bit context - 0x01 in a 7-bit context
 byte distance;
@@ -25,7 +27,7 @@ void loop()
   distance = readDistance();
   if(distance == 0xFF){
     Serial.println("Error Reading Distance");
-    analogWrite(A0, ((int)(distance))/100);
+    //analogWrite(A0, ((int)(distance))/100); //Not needed because no distance
   }else{
     Serial.println(distance, DEC);
     analogWrite(A0, ((int)(distance))/100); 
